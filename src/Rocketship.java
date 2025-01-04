@@ -23,27 +23,33 @@ public class Rocketship extends GameObject {
 		}
 	}
 	
-	public void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-        g.fillRect(x, y, width, height);
+	public void draw(Graphics g) {        
+        if(gotImage) {
+        	g.drawImage(image, x, y, width, height, null);	
+        } else {
+        	g.setColor(Color.BLUE);
+        	g.fillRect(x, y, width, height);
+        }
 	}
 	
 	public void update() {
-		if(up) {
+		if(up && y > 0) {
 			y-=speed;
 		}
 		
-		if(left) {
+		if(left && x > 0) {
 			x-=speed;
 		}
 		
-		if(right) {
+		if(right && x + width < LeagueInvaders.WIDTH) {
 			x+=speed;
 		}
 		
-		if(down) {
+		if(down && y + height < LeagueInvaders.HEIGHT) {
 			y+=speed;
 		}
+		
+		super.update();
 		
 	}
 	
@@ -57,5 +63,9 @@ public class Rocketship extends GameObject {
 	        }
 	        needImage = false;
 	    }
+	}
+	
+	public Projectile getProjectile() {
+		return new Projectile(x+width/2, y, 10, 10);
 	}
 }

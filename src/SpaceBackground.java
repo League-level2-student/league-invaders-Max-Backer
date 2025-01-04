@@ -1,39 +1,32 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-
 import javax.imageio.ImageIO;
 
-public class Projectile extends GameObject {
+public class SpaceBackground extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
-	public static boolean gotImage = false;	
+	public static boolean gotImage = false;
 
-	public Projectile(int x, int y, int width, int height) {
-		super(x, y, width, height);
-		
-		speed = 10;
-		
+	public SpaceBackground(String imageFile) {
+		// Initialize the background position and size
+		super(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		if (needImage) {
-		    loadImage ("bullet.png");
+			loadImage("space.png");
 		}
 	}
-	
+
 	public void draw(Graphics g) {
-        if (gotImage) {
-        	g.drawImage(image, x, y, width, height, null);
-        } else {
-        	g.setColor(Color.BLUE);
-        	g.fillRect(x, y, width, height);
-        }
-	}
-	
-	public void update() {
-		y-=speed;
-		super.update();
+		if (gotImage) {
 		
+			g.drawImage(image, x, y, width, height, null);
+		} else {
+			
+			g.setColor(Color.BLUE);
+			g.fillRect(x, y, width, height);
+		}
 	}
-	
+
 	void loadImage(String imageFile) {
 	    if (needImage) {
 	        try {
@@ -45,5 +38,4 @@ public class Projectile extends GameObject {
 	        needImage = false;
 	    }
 	}
-
 }
